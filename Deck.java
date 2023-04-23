@@ -36,51 +36,68 @@ public class Deck {
     }
 
     //DESGLOSE DE LAS FUNCIONES DEL SISTEMA CON BASE AL USO DEL DECK
-    public void Head(){
+    public void Head() throws Exception{
         //IMPLICACIÓN DEL COLLECTION FRAMEWORK DENTRO DEL MÉTODO HEAD
+        if(CartasI.size()==0 || CartasI.size()<1) {
+        throw new Exception("Se han agotado las cartas");
+        }
         Card cardU = CartasI.remove(0);
-        System.out.println(cardU.getPalo()+","+cardU.getEquivalencia()+","+cardU.getColores()+",");
-        System.out.println("Se disponen de:  "+ CartasI.size()+" cartas implicadas dentro del Deck");
-    }
-    public void Pick(){
+        System.out.println(cardU.getPalo() + "," + cardU.getEquivalencia() + "," + cardU.getColores() + ",");
+        System.out.println("Se disponen de:  " + CartasI.size() + " cartas implicadas dentro del Deck");
+        }
+
+
+    public void Pick() throws Exception{
         //DEFINCIÓN DEL ÍNDICE IMPLICADO DENTRO DEL SISTEMA PARA LA FUNCIÓN Y GENERACIÓN DE PARÁMETROS DE ACCIÓN ALEATORIOS
-        int indiceU = random.nextInt(this.CartasI.size());
-        Card cardI = CartasI.remove(indiceU);
-        System.out.println(cardI.getPalo()+","+cardI.getEquivalencia()+","+cardI.getColores()+",");
-        System.out.println("Se disponen de "+CartasI.size()+" cartas dentro del Deck");
-    }
+        if(CartasI.size()==0 || CartasI.size()<1) {
+            throw new Exception("Se han agotado las cartas");
+        }
+            int indiceU = random.nextInt(this.CartasI.size());
+            Card cardI = CartasI.remove(indiceU);
+            System.out.println(cardI.getPalo() + "," + cardI.getEquivalencia() + "," + cardI.getColores() + ",");
+            System.out.println("Se disponen de " + CartasI.size() + " cartas dentro del Deck");
+        }
+
+
 
     public void Shuffle(){
         Collections.shuffle(CartasI);
         System.out.println("El Deck ha sido mezclado correctamente");
     }
 
-    public ArrayList<Card> Hand(){
-        ArrayList<Card> HandU = new ArrayList<Card>();
-        //RECORRIDO DEL MÉTODO DEL SISTEMA CON BASE AL USO Y DISPOSICIÓN DE UNA ESTRUCTURA DE REPETICIÓN FOR
-        for (int j = 0; j < 5; j++){
-            Card cardU = CartasI.remove(0);
-            HandU.add(cardU);
-            System.out.println(cardU.getPalo()+","+cardU.getEquivalencia()+","+cardU.getColores()+",");
-        }
-        System.out.println("Se disponen de: "+CartasI.size()+" cartas dentro del Deck");
-        return HandU;
-    }
+    public ArrayList<Card> Hand() throws Exception{
 
-    public void CambiarCarta(){
-        int cambioC = Integer.parseInt(JOptionPane.showInputDialog("Favor de ingresar el número de cartas sobre el cual desea hacer el cambio, recuerde que es entre el 0 y el 5: "));
-        for(int i=0; i<cambioC; i++){
-            int indiceU = random.nextInt(this.CartasI.size());
-            Card cardI = CartasI.remove(indiceU);
-            System.out.println(cardI.getPalo()+","+cardI.getEquivalencia()+","+cardI.getColores()+",");
+            ArrayList<Card> HandU = new ArrayList<Card>();
+            //RECORRIDO DEL MÉTODO DEL SISTEMA CON BASE AL USO Y DISPOSICIÓN DE UNA ESTRUCTURA DE REPETICIÓN FOR
+        if(CartasI.size()==0 || CartasI.size()<1) {
+            throw new Exception("Se han agotado las cartas");
         }
-        System.out.println("Se disponen de "+CartasI.size()+" cartas dentro del Deck");
-        System.out.println("Se hizo el cambio correcto de: " + cambioC + " cartas");
+        for (int j = 0; j < 5; j++) {
+                Card cardU = CartasI.remove(0);
+                HandU.add(cardU);
+                System.out.println(cardU.getPalo() + "," + cardU.getEquivalencia() + "," + cardU.getColores() + ",");
+            }
+            System.out.println("Se disponen de: " + CartasI.size() + " cartas dentro del Deck");
+            return HandU;
+        }
+
+    public void CambiarCarta() throws Exception {
+        if(CartasI.size()==0 || CartasI.size()<1) {
+            throw new Exception("Se han agotado las cartas");
+        }
+            int cambioC = Integer.parseInt(JOptionPane.showInputDialog("Favor de ingresar el número de cartas sobre el cual desea hacer el cambio, recuerde que es entre el 0 y el 5: "));
+            for (int i = 0; i < cambioC; i++) {
+                int indiceU = random.nextInt(this.CartasI.size());
+                Card cardI = CartasI.remove(indiceU);
+                System.out.println(cardI.getPalo() + "," + cardI.getEquivalencia() + "," + cardI.getColores() + ",");
+            }
+            System.out.println("Se disponen de " + CartasI.size() + " cartas dentro del Deck");
+            System.out.println("Se hizo el cambio correcto de: " + cambioC + " cartas");
     }
 
     //IMPLICACIÓN DEL MÉTOOD QUE PERMITE OBTENER EL NÚMERO DE CARTAS DEL SISTEMA
     public int numCartas(){
-    return CartasI.size();
+        return CartasI.size();
     }
 }
 
